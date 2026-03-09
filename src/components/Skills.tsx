@@ -23,23 +23,19 @@ export default function Skills() {
             <span className="section-tag">{"// skills"}</span>
             <h2>
               I Work With{" "}
-              <span
-                id="skills-default-text"
-                style={{
-                  opacity: highlight ? 0 : 1,
-                  maxWidth: highlight ? "0" : "300px",
-                }}
-              >
-                ...
-              </span>
-              <span
-                id="skills-highlight"
-                style={{
-                  opacity: highlight ? 1 : 0,
-                  maxWidth: highlight ? "300px" : "0",
-                }}
-              >
-                {highlight}
+              <span className="skills-swap">
+                <span
+                  id="skills-default-text"
+                  className={highlight ? 'hidden' : ''}
+                >
+                  ...
+                </span>
+                <span
+                  id="skills-highlight"
+                  className={highlight ? 'visible' : ''}
+                >
+                  {highlight}
+                </span>
               </span>
             </h2>
           </div>
