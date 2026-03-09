@@ -32,12 +32,12 @@ export default function Hero() {
       playMode: "hover",
       createContainers: true,
       hideOverflow: false,
-      timing: { duration: 600, iterations: 1, easing: "ease-in-out" },
+      timing: { duration: 400, iterations: 1, easing: "ease-in-out" },
       glitchTimeSpan: { start: 0, end: 1 },
-      shake: { velocity: 15, amplitudeX: 0.05, amplitudeY: 0.05 },
+      shake: { velocity: 20, amplitudeX: 0.05, amplitudeY: 0.05 },
       slice: {
         count: 6,
-        velocity: 10,
+        velocity: 15,
         minHeight: 0.01,
         maxHeight: 0.05,
         hueRotate: true,
@@ -95,13 +95,16 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Parallax mouse tracking for orbs */
+  /* Parallax mouse tracking for orbs — follows globally, fades out past hero */
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
 
     hero.style.setProperty("--hx", "50%");
     hero.style.setProperty("--hy", "40%");
+
+    const heroBg = hero.querySelector(".hero-bg") as HTMLElement | null;
+    if (heroBg) heroBg.style.transition = "opacity 0.6s ease";
 
     const onMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect();
@@ -126,9 +129,20 @@ export default function Hero() {
         ring1.style.translate = `${mouse.current.x * 15}px ${mouse.current.y * 15}px`;
       if (ring2)
         ring2.style.translate = `${mouse.current.x * -10}px ${mouse.current.y * -10}px`;
+
+      /* Fade out the hero glow when cursor moves below the hero */
+      if (heroBg) {
+        const distBelow = e.clientY - rect.bottom;
+        if (distBelow <= 0) {
+          heroBg.style.opacity = "1";
+        } else {
+          const fadeZone = rect.height * 0.35;
+          heroBg.style.opacity = String(Math.max(0, 1 - distBelow / fadeZone));
+        }
+      }
     };
-    hero.addEventListener("mousemove", onMove);
-    return () => hero.removeEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
   return (
