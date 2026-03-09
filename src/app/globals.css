@@ -932,6 +932,10 @@ body.nav-locked {
   gap: 1.5rem;
 }
 
+.projects-grid > .featured-project-item {
+  grid-column: 1 / -1;
+}
+
 .project-card {
   padding: 1.8rem;
   display: flex;

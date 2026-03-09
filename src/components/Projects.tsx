@@ -21,6 +21,13 @@ const PROJECTS: Project[] = [
     href: 'https://github.com/voximir-p/totp',
   },
   {
+    tag: 'CLI Tool',
+    title: 'VVD',
+    desc: 'A simple command-line tool written in Python that allows you to download videos from multiple websites.',
+    stack: ['Python', 'Downloader', 'yt-dlp'],
+    href: 'https://github.com/voximir-p/VVD/',
+  },
+  {
     tag: 'Open Source',
     title: 'aria2c-gui',
     desc: 'A Gradio web application that helps a new aria2c user by being able to use it as a GUI.',
@@ -107,7 +114,11 @@ export default function Projects() {
 
         <div className="projects-grid">
           {PROJECTS.map((p, i) => (
-            <RevealWrapper key={p.title} delay={i * 0.1}>
+            <RevealWrapper
+              key={p.title}
+              delay={i * 0.1}
+              className={p.featured ? 'featured-project-item' : ''}
+            >
               <ProjectCard project={p} />
             </RevealWrapper>
           ))}
