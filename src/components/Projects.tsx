@@ -72,13 +72,13 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="project-meta">
         <span className="project-tag">{project.tag}</span>
         <div className="project-links">
-          <a href={project.href} target="_blank" rel="noopener" title="GitHub">↗</a>
+          <a href={project.href} target="_blank" rel="noopener" title="GitHub" className="project-link-arrow">↗</a>
         </div>
       </div>
       <h3>{project.title}</h3>
       <p>{project.desc}</p>
       <div className="project-stack">
-        {project.stack.map(s => <span key={s}>{s}</span>)}
+        {project.stack.map(s => <span key={s} className="stack-chip">{s}</span>)}
       </div>
     </article>
   );

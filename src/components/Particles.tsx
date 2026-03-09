@@ -21,8 +21,10 @@ export default function Particles() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let w = canvas.width;
+    let h = canvas.height;
 
     const colors = ['rgba(0,247,255,', 'rgba(124,58,237,', 'rgba(244,114,182,'];
     const COUNT = 60;
@@ -41,8 +43,10 @@ export default function Particles() {
     }
 
     const onResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      w = canvas.width;
+      h = canvas.height;
     };
 
     const onMouse = (e: MouseEvent) => {

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import RevealWrapper from './RevealWrapper';
 
@@ -10,6 +10,33 @@ const TAGS = ['Open Source', 'Problem Solver', 'Critical Thinker'];
 
 export default function About() {
   const [age, setAge] = useState('15.00');
+  const avatarWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const update = () => setAge(((Date.now() - BIRTHDAY.getTime()) / MS_PER_YEAR).toFixed(2));
+    update();
+    const id = setInterval(update, 100);
+    return () => clearInterval(id);
+  }, []);
+
+  /* 3D tilt on avatar */
+  useEffect(() => {
+    const el = avatarWrapperRef.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      el.style.transform = `perspective(600px) rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.05)`;
+    };
+    const onLeave = () => { el.style.transform = ''; };
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => {
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
 
   useEffect(() => {
     const update = () => setAge(((Date.now() - BIRTHDAY.getTime()) / MS_PER_YEAR).toFixed(2));
@@ -32,8 +59,13 @@ export default function About() {
           {/* Avatar column */}
           <RevealWrapper>
             <div className="about-avatar">
-              <div className="avatar-wrapper">
+              <div
+                className="avatar-wrapper"
+                ref={avatarWrapperRef}
+                style={{ transition: 'transform 0.3s cubic-bezier(0.23,1,0.32,1)' }}
+              >
                 <div className="avatar-ring" />
+                <div className="avatar-glow-pulse" />
                 <Image
                   src="/img/profile.webp"
                   alt="Voximir"
@@ -44,11 +76,12 @@ export default function About() {
                 />
               </div>
               <div className="about-stats glass">
-                <div className="stat">
+                <div className="stat hover-lift">
                   <span className="stat-num">{age}</span>
                   <span className="stat-label"><b>Years Old</b></span>
                 </div>
-                <div className="stat">
+                <div className="stat-divider" />
+                <div className="stat hover-lift">
                   <span className="stat-num">40+</span>
                   <span className="stat-label"><b>Projects</b></span>
                 </div>
@@ -74,7 +107,12 @@ export default function About() {
                 work, refining my workflow, and occasionally relaxing with games and other small interests.
               </p>
               <div className="about-tags">
-                {TAGS.map(t => <span key={t} className="tag">{t}</span>)}
+                {TAGS.map((t, i) => (
+                  <span key={t} className="tag tag-interactive" style={{ animationDelay: `${i * 0.15}s` }}>
+                    <span className="tag-dot" />
+                    {t}
+                  </span>
+                ))}
               </div>
             </div>
           </RevealWrapper>

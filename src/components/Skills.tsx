@@ -61,13 +61,14 @@ export default function Skills() {
 
           <RevealWrapper>
             <div className="skills-icons">
-              {SKILLS.map((skill) => (
+              {SKILLS.map((skill, i) => (
                 <div
                   key={skill.lang}
                   className="skill-icon-item"
                   data-lang={skill.lang}
                   role="img"
                   aria-label={skill.lang}
+                  style={{ animationDelay: `${i * 0.12}s` }}
                   onPointerEnter={() => {
                     if (!isTouchRef.current) setHighlight(skill.lang);
                   }}
@@ -87,6 +88,7 @@ export default function Skills() {
                     }
                   }}
                 >
+                  <span className="skill-icon-glow" />
                   <i className={skill.icon} />
                 </div>
               ))}

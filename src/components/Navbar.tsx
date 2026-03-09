@@ -83,11 +83,12 @@ export default function Navbar() {
           onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
           aria-label="Menu"
         >
-          Contacts
+          <span className="nav-contact-text">Contacts</span>
+          <span className="nav-contact-ripple" />
         </button>
         <div className={`nav-dropdown${open ? ' open' : ''}`}>
-          {SOCIALS.map(s => (
-            <a key={s.title} href={s.href} target="_blank" rel="noopener" title={s.title}>
+          {SOCIALS.map((s, i) => (
+            <a key={s.title} href={s.href} target="_blank" rel="noopener" title={s.title} style={{ animationDelay: `${i * 0.05}s` }}>
               <Image src={s.img} alt={s.title} width={22} height={22} />
             </a>
           ))}
