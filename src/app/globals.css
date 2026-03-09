@@ -926,7 +926,13 @@ body.nav-locked {
   transition: all 0.3s ease;
   text-decoration: none;
   color: var(--text-muted);
-  font-size: 1rem;
+  line-height: 0;
+}
+
+.project-link-arrow-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
 }
 
 .project-link-arrow:hover {
@@ -1119,8 +1125,15 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
 
 .footer-heart {
   display: inline-block;
-  color: var(--accent3);
+  line-height: 0;
   animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+.footer-heart-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @keyframes heartbeat {

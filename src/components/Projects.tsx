@@ -1,5 +1,6 @@
 'use client';
 import { useRef } from 'react';
+import Image from 'next/image';
 import RevealWrapper from './RevealWrapper';
 
 interface Project {
@@ -72,7 +73,16 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="project-meta">
         <span className="project-tag">{project.tag}</span>
         <div className="project-links">
-          <a href={project.href} target="_blank" rel="noopener" title="GitHub" className="project-link-arrow">↗</a>
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener"
+            title="GitHub"
+            aria-label={`Open ${project.title} on GitHub`}
+            className="project-link-arrow"
+          >
+            <Image src="/svg/arrow.svg" alt="" aria-hidden="true" width={14} height={14} className="project-link-arrow-icon" />
+          </a>
         </div>
       </div>
       <h3>{project.title}</h3>
