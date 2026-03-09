@@ -784,7 +784,7 @@ body.nav-locked {
 }
 
 .skills-layout { display: flex; flex-direction: column; gap: 2.5rem; }
-.skills-desc p { font-size: 1.05rem; max-width: 720px; }
+.skills-desc p { font-size: 1.05rem; max-width: 720px; margin: 20px; }
 
 .skills-icons {
   display: flex;
@@ -1325,7 +1325,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   .hero-grid-lines { display: none; }
   .hero-spotlight { opacity: 0.45; }
   .about-br { display: none; }
-  .container { padding: 0 1.2rem; }
+  .container { padding: 0 1.4rem; }
 
   /* Navbar */
   #navbar { padding: 0.9rem 1.2rem; }
@@ -1397,13 +1397,22 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
 
   /* Sections */
   .section { padding: 50px 0; }
-  #about, #skills, #projects { min-height: auto; padding: 60px 0; }
+  #about, #skills { min-height: 100svh; padding: 60px 15px; }
+  #projects { min-height: auto; padding: 60px 0; }
   .section-header { margin-bottom: 2rem; }
+
+  /* Footer spacing: keep close to the final projects card on mobile */
+  footer {
+    min-height: auto;
+    justify-content: flex-start;
+    padding-top: 0.5rem;
+    padding-bottom: 1.2rem;
+  }
 }
 
 /* ── Responsive: Small phone (≤ 480px) ────────────────── */
 @media (max-width: 480px) {
-  .container { padding: 0 1rem; }
+  .container { padding: 0 1.2rem; }
 
   /* Navbar */
   .nav-contact { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
@@ -1440,6 +1449,8 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   .project-stack span,
   .stack-chip { font-size: 0.7rem; padding: 0.15rem 0.5rem; }
 
+  #projects { padding-bottom: 8rem; }
+
   /* Footer */
   footer p { font-size: 0.8rem; }
 }
@@ -1449,7 +1460,8 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   #hero, #about, #skills, #projects { min-height: 100dvh; }
   @media (max-width: 768px) {
     .nav-links { height: 100dvh; }
-    #about, #skills, #projects { min-height: auto; }
+    #about, #skills { min-height: 100dvh; }
+    #projects { min-height: auto; }
   }
 }
 
