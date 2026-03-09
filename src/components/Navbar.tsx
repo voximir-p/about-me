@@ -81,7 +81,7 @@ export default function Navbar() {
           type="button"
           className={`nav-contact${open ? ' active' : ''}`}
           onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
-          aria-label="Menu"Hee tung tung
+          aria-label="Menu"
         >
           <span className="nav-contact-text">Contact Me</span>
           <span className="nav-contact-ripple" />
