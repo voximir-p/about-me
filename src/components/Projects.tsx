@@ -25,7 +25,7 @@ const PROJECTS: Project[] = [
   {
     tag: 'Featured', featured: true,
     title: 'cppu',
-    desc: 'A C++ utility tool for competitive programming written in Rust. It can compile your code, use an input from a file and can output to another file.',
+    desc: 'A C++ utility tool for competitive programming. It can compile your code, read input from a file, and write output to another file.',
     stack: ['C++', 'Rust', 'Competitive Programming'],
     href: `${GITHUB_PROFILE_URL}/cppu`,
   },
