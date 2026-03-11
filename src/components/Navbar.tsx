@@ -1,11 +1,16 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const NAV_LINKS = [
   { label: 'Home',     href: '#hero' },
   { label: 'About',    href: '#about' },
   { label: 'Skills',   href: '#skills' },
   { label: 'Projects', href: '#projects' },
+];
+
+const NAV_ICONS = [
+  { href: 'https://bitcalc.voximir.org', icon: '/svg/calculator.svg', title: 'Bit Size Calculator' },
 ];
 
 export default function Navbar() {
@@ -67,6 +72,15 @@ export default function Navbar() {
     <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
       <span className="nav-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
 
+      {/* Icon links (left) */}
+      <div className="nav-icons">
+        {NAV_ICONS.map(item => (
+          <a key={item.title} href={item.href} target="_blank" rel="noopener" title={item.title} className="nav-icon-link">
+            <Image src={item.icon} alt={item.title} width={20} height={20} />
+          </a>
+        ))}
+      </div>
+
       {/* Mobile overlay */}
       {mobileNav && (
         <button
@@ -77,7 +91,7 @@ export default function Navbar() {
         />
       )}
 
-      {/* Nav links */}
+      {/* Nav links (right) */}
       <ul ref={linksRef} className={`nav-links${mobileNav ? ' mobile-open' : ''}`}>
         {NAV_LINKS.map(link => {
           const id = link.href.replace('#', '');

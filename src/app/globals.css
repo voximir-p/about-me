@@ -244,8 +244,8 @@ strong { color: var(--text); }
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 1.2rem 2rem;
+  justify-content: space-between;
+  padding: 1.2rem 1.25rem;
   transition: all 0.4s ease;
 }
 
@@ -266,7 +266,7 @@ strong { color: var(--text); }
   background: rgba(5, 5, 8, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 1.2rem;
 }
 
 .nav-logo {
@@ -326,6 +326,37 @@ strong { color: var(--text); }
   box-shadow: 0 0 8px var(--glow);
   transition: left 0.3s ease, width 0.3s ease;
   pointer-events: none;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.5rem;
+}
+
+.nav-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.nav-icon-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--glow);
+  transform: translateY(-2px);
+}
+
+.nav-icon-link img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .nav-contact {
@@ -1390,8 +1421,8 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   .container { padding: 0 1.4rem; }
 
   /* Navbar */
-  #navbar { padding: 0.9rem 1.2rem; }
-  #navbar.scrolled { padding: 0.7rem 1.2rem; }
+  #navbar { padding: 0.9rem; }
+  #navbar.scrolled { padding: 0.7rem 0.9rem; }
 
   .nav-toggle { display: flex; }
 
