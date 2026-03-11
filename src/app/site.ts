@@ -3,7 +3,7 @@ export const siteConfig = {
   title: 'Voximir | Developer Portfolio',
   description:
     'Personal portfolio of Voximir, a developer building open-source tools, clean interfaces, and practical software projects.',
-  url: (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, ''),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.voximir.org').replace(/\/$/, ''),
   ogImage: '/img/profile.webp',
   github: 'https://github.com/voximir-p',
   instagram: 'https://www.instagram.com/voximir/',

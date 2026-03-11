@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 
 const NAV_LINKS = [
   { label: 'Home',     href: '#hero' },
@@ -9,21 +8,13 @@ const NAV_LINKS = [
   { label: 'Projects', href: '#projects' },
 ];
 
-const SOCIALS = [
-  { href: 'https://github.com/voximir-p/',                          title: 'GitHub',    img: '/svg/github.svg'    },
-  { href: 'https://discord.com/users/711114008954142752',           title: 'Discord',   img: '/svg/discord.svg'   },
-  { href: 'https://web.facebook.com/pek.n.thach/',                  title: 'Facebook',  img: '/svg/facebook.svg'  },
-  { href: 'https://www.instagram.com/voximir/',                     title: 'Instagram', img: '/svg/instagram.svg' },
-  { href: 'mailto:pek795b@gmail.com',                               title: 'E-Mail',    img: '/svg/email.svg'     },
-];
-
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
-  const [open, setOpen]           = useState(false);
+
   const [mobileNav, setMobileNav] = useState(false);
   const [active, setActive]       = useState('');
   const [scrollProgress, setScrollProgress] = useState(0);
-  const dropdownRef               = useRef<HTMLDivElement>(null);
+
   const linksRef                  = useRef<HTMLUListElement>(null);
   const [underline, setUnderline] = useState({ left: 0, width: 0 });
 
@@ -59,13 +50,7 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', updateUnderline);
   }, [active]);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
-  }, []);
+
 
   useEffect(() => {
     document.body.classList.toggle('nav-locked', mobileNav);
@@ -81,25 +66,6 @@ export default function Navbar() {
   return (
     <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
       <span className="nav-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
-      {/* Hamburger / Contact Me */}
-      <div className="nav-menu" ref={dropdownRef}>
-        <button
-          type="button"
-          className={`nav-contact${open ? ' active' : ''}`}
-          onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
-          aria-label="Menu"
-        >
-          <span className="nav-contact-text">Contact Me</span>
-          <span className="nav-contact-ripple" />
-        </button>
-        <div className={`nav-dropdown${open ? ' open' : ''}`}>
-          {SOCIALS.map((s, i) => (
-            <a key={s.title} href={s.href} target="_blank" rel="noopener" title={s.title} style={{ animationDelay: `${i * 0.05}s` }}>
-              <Image src={s.img} alt={s.title} width={22} height={22} />
-            </a>
-          ))}
-        </div>
-      </div>
 
       {/* Mobile overlay */}
       {mobileNav && (

@@ -1,7 +1,16 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { PowerGlitch } from "powerglitch";
 import MagneticButton from "./MagneticButton";
+
+const SOCIALS = [
+  { href: 'https://github.com/voximir-p/',                          title: 'GitHub',    img: '/svg/github.svg'    },
+  { href: 'https://discord.com/users/711114008954142752',           title: 'Discord',   img: '/svg/discord.svg'   },
+  { href: 'https://web.facebook.com/pek.n.thach/',                  title: 'Facebook',  img: '/svg/facebook.svg'  },
+  { href: 'https://www.instagram.com/voximir/',                     title: 'Instagram', img: '/svg/instagram.svg' },
+  { href: 'mailto:pek795b@gmail.com',                               title: 'E-Mail',    img: '/svg/email.svg'     },
+];
 
 const TYPED_STRINGS = [
   "open-source tools.",
@@ -18,11 +27,13 @@ const PAUSE_BEFORE = 400;
 export default function Hero() {
   const [typed, setTyped] = useState("");
   const [scrollOpacity, setOpacity] = useState(1);
+  const [contactOpen, setContactOpen] = useState(false);
   const stringIndex = useRef(0);
   const charIndex = useRef(0);
   const isDeleting = useRef(false);
   const heroRef = useRef<HTMLElement>(null);
   const glitchRef = useRef<HTMLSpanElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const mouse = useRef({ x: 0, y: 0 });
 
   /* PowerGlitch on name */
@@ -93,6 +104,17 @@ export default function Hero() {
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* Close contact dropdown on outside click */
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setContactOpen(false);
+      }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
   }, []);
 
   /* Parallax mouse tracking for orbs — follows globally, fades out past hero */
@@ -173,7 +195,7 @@ export default function Hero() {
           I build <span className="typed-text">{typed}</span>
           <span className="cursor">|</span>
         </p>
-        <p className="hero-desc">Check out some of my works.</p>
+        <p className="hero-desc">Check out some of my work, and contact me if you're interested.</p>
         <div className="hero-actions">
           <MagneticButton
             href="#projects"
@@ -198,6 +220,25 @@ export default function Hero() {
             <span className="btn-glow" />
             <span className="btn-ripple" />
           </MagneticButton>
+          
+          <div className="hero-contact-menu" ref={dropdownRef}>
+            <button
+              type="button"
+              className={`nav-contact${contactOpen ? ' active' : ''}`}
+              onClick={(e) => { e.stopPropagation(); setContactOpen(o => !o); }}
+              aria-label="Contact menu"
+            >
+              <span className="nav-contact-text">Contact Me</span>
+              <span className="nav-contact-ripple" />
+            </button>
+            <div className={`nav-dropdown${contactOpen ? ' open' : ''}`}>
+              {SOCIALS.map((s, i) => (
+                <a key={s.title} href={s.href} target="_blank" rel="noopener" title={s.title} style={{ animationDelay: `${i * 0.05}s` }}>
+                  <Image src={s.img} alt={s.title} width={22} height={22} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
