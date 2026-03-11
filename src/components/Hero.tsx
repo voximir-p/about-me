@@ -5,11 +5,11 @@ import { PowerGlitch } from "powerglitch";
 import MagneticButton from "./MagneticButton";
 
 const SOCIALS = [
-  { href: 'https://github.com/voximir-p/',                          title: 'GitHub',    img: '/svg/github.svg'    },
-  { href: 'https://discord.com/users/711114008954142752',           title: 'Discord',   img: '/svg/discord.svg'   },
-  { href: 'https://web.facebook.com/pek.n.thach/',                  title: 'Facebook',  img: '/svg/facebook.svg'  },
-  { href: 'https://www.instagram.com/voximir/',                     title: 'Instagram', img: '/svg/instagram.svg' },
-  { href: 'mailto:pek795b@gmail.com',                               title: 'E-Mail',    img: '/svg/email.svg'     },
+  { href: 'https://github.com/voximir-p/',                title: 'GitHub',    img: '/svg/github.svg'    },
+  { href: 'https://discord.com/users/711114008954142752', title: 'Discord',   img: '/svg/discord.svg'   },
+  { href: 'https://web.facebook.com/pek.n.thach/',        title: 'Facebook',  img: '/svg/facebook.svg'  },
+  { href: 'https://www.instagram.com/voximir/',           title: 'Instagram', img: '/svg/instagram.svg' },
+  { href: 'mailto:pek795b@gmail.com',                     title: 'E-Mail',    img: '/svg/email.svg'     },
 ];
 
 const TYPED_STRINGS = [
