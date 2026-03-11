@@ -21,7 +21,14 @@ const PROJECTS: Project[] = [
     href: 'https://github.com/voximir-p/totp',
   },
   {
-    tag: 'CLI Tool',
+    tag: 'Featured', featured: true,
+    title: 'cppu',
+    desc: 'A C++ utility tool for competitive programming. It can compile your code, use an input from a file and can output to another file.',
+    stack: ['Rust', 'C++', 'Utility', 'Competitive Programming'],
+    href: 'https://github.com/voximir-p/cppu',
+  },
+  {
+    tag: 'CLI Tool', featured: true,
     title: 'VVD',
     desc: 'A simple command-line tool written in Python that allows you to download videos from multiple websites.',
     stack: ['Python', 'Downloader', 'yt-dlp'],
@@ -102,6 +109,10 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
+  const featuredCount = PROJECTS.filter((p) => p.featured).length;
+  const shouldSpanFirstFeatured = featuredCount % 2 === 1;
+  const firstFeaturedIndex = PROJECTS.findIndex((p) => p.featured);
+
   return (
     <section id="projects" className="section">
       <div className="container">
@@ -117,7 +128,11 @@ export default function Projects() {
             <RevealWrapper
               key={p.title}
               delay={i * 0.1}
-              className={p.featured ? 'featured-project-item' : ''}
+              className={
+                shouldSpanFirstFeatured && i === firstFeaturedIndex
+                  ? 'featured-project-item'
+                  : ''
+              }
             >
               <ProjectCard project={p} />
             </RevealWrapper>
